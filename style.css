@@ -1,0 +1,25 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+.flexContainer {
+    display: flex !important;
+}
+
+.flexContainer div {
+    width: 25%;
+    border-right: 1px dotted black;
+    padding: 4px 10px;
+}
+
+.flexContainer div:last-child {
+    border-right: none;
+}
+
+.flexContainer div h2 {
+    text-align: center;
+}
