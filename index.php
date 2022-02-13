@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 function checkRedirect(string $site) {
-
     $headers = get_headers($site, 1);
 
     $codeArray = array_filter($headers, function ($k) {
@@ -14,10 +13,16 @@ function checkRedirect(string $site) {
 
     $locationArray = is_array($headers['Location']) ? $headers['Location'] : [$headers['Location']];
 
-    echo '<p>' . $site . ' - ' . $headers[0] . '</p>';
+    $content = '';
+
+    $content =  '<p>' . $site . ' - ' . $headers[0] . '</p>';
     foreach ($locationArray as $key => $el) {
-        echo '<p>' . $el . ' - ' . $codeArray[$key + 1] . '</p>';
+        if ($el) {
+            $content .= '<p><i class="fa-solid fa-arrow-down"></i></p>';
+            $content .= '<p>' . $el . ' - ' . $codeArray[$key + 1] . '</p>';
+        }
     }
+    return $content;
 }
 
 ?>
@@ -30,6 +35,7 @@ function checkRedirect(string $site) {
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Śledzenie przekierowań</title>
+    <script src="https://kit.fontawesome.com/5d2cac9ab1.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
@@ -46,21 +52,22 @@ function checkRedirect(string $site) {
     <?php if ($_POST['url']): ?>
         <div>
             <h2>https://</h2>
-            <?php checkRedirect('https://' . $_POST['url']); ?>
+            <?php echo checkRedirect('https://' . $_POST['url']); ?>
         </div>
         <div>
             <h2>https://www.</h2>
-            <?php checkRedirect('https://www.' . $_POST['url']); ?>
+            <?php echo checkRedirect('https://www.' . $_POST['url']); ?>
         </div>
         <div>
             <h2>http://</h2>
-            <?php checkRedirect('http://' . $_POST['url']); ?>
+            <?php echo checkRedirect('http://' . $_POST['url']); ?>
         </div>
         <div>
             <h2>http://www.</h2>
-            <?php checkRedirect('http://www.' . $_POST['url']); ?>
+            <?php echo checkRedirect('http://www.' . $_POST['url']); ?>
         </div>
     <?php endif; ?>
 </div>
+<script src="script.js"></script>
 </body>
 </html>

@@ -23,3 +23,7 @@ h1 {
 .flexContainer div h2 {
     text-align: center;
 }
+
+.flexContainer p {
+    text-align: center;
+}
