@@ -15,11 +15,11 @@ function checkRedirect(string $site) {
 
     $content = '';
 
-    $content =  '<p>' . $site . ' - ' . $headers[0] . '</p>';
+    $content = '<p>' . $site . ' <br> ' . $headers[0] . '</p>';
     foreach ($locationArray as $key => $el) {
         if ($el) {
             $content .= '<p><i class="fa-solid fa-arrow-down"></i></p>';
-            $content .= '<p>' . $el . ' - ' . $codeArray[$key + 1] . '</p>';
+            $content .= '<p>' . $el . ' <br> ' . $codeArray[$key + 1] . '</p>';
         }
     }
     return $content;
@@ -43,11 +43,13 @@ function checkRedirect(string $site) {
 </head>
 <body>
 <h1>Śledzenie przekierowań</h1>
-<form action="/" method="post">
-    <p>Adres URL</p>
-    <input type="text" name="url" required>
-    <input type="submit" value="Sprawdź przekierowania">
-</form>
+<div class="formArea">
+    <h2>Adres URL</h2>
+    <form action="/" method="post">
+        <p><input type="text" name="url" required></p>
+        <p><input type="submit" value="Sprawdź przekierowania"></p>
+    </form>
+</div>
 <div class="flexContainer">
     <?php if ($_POST['url']): ?>
         <div>

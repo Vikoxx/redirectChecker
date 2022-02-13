@@ -1,9 +1,44 @@
 body {
     font-family: 'Roboto', sans-serif;
+    background-image: url('background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
 }
 
 h1 {
     text-align: center;
+}
+
+.formArea {
+    text-align: center;
+}
+
+.formArea input {
+    min-width: 200px;
+    font-size: 24px;
+}
+
+.formArea input[type=text] {
+    width: 50%;
+    border-radius: 20px;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+}
+
+.formArea input[type=submit] {
+    padding: 10px 40px;
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    width: 400px;
+    transition: 0.4s;
+}
+
+.formArea input[type=submit]:hover {
+    background: rgba(0, 0, 0, 0.4);
 }
 
 .flexContainer {
@@ -12,7 +47,7 @@ h1 {
 
 .flexContainer div {
     width: 25%;
-    border-right: 1px dotted black;
+    border-right: 1px dotted white;
     padding: 4px 10px;
 }
 
