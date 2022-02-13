@@ -1,8 +1,9 @@
 <?php
 
 declare(strict_types=1);
+error_reporting(0);
 
-function checkRedirect(string $site) {
+function run(string $site) {
     $headers = get_headers($site, 1);
 
     $codeArray = array_filter($headers, function ($k) {
@@ -25,51 +26,12 @@ function checkRedirect(string $site) {
     return $content;
 }
 
+require_once 'src/View.php';
+require_once 'src/CheckRedirect.php';
+
+$app = new CheckRedirect();
+$view = new View();
+$view->render();
+
 ?>
 
-<!doctype html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Śledzenie przekierowań</title>
-    <script src="https://kit.fontawesome.com/5d2cac9ab1.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<h1>Śledzenie przekierowań</h1>
-<div class="formArea">
-    <h2>Adres URL</h2>
-    <form action="/" method="post">
-        <p><input type="text" name="url" required></p>
-        <p><input type="submit" value="Sprawdź przekierowania"></p>
-    </form>
-</div>
-<div class="flexContainer">
-    <?php if ($_POST['url']): ?>
-        <div>
-            <h2>https://</h2>
-            <?php echo checkRedirect('https://' . $_POST['url']); ?>
-        </div>
-        <div>
-            <h2>https://www.</h2>
-            <?php echo checkRedirect('https://www.' . $_POST['url']); ?>
-        </div>
-        <div>
-            <h2>http://</h2>
-            <?php echo checkRedirect('http://' . $_POST['url']); ?>
-        </div>
-        <div>
-            <h2>http://www.</h2>
-            <?php echo checkRedirect('http://www.' . $_POST['url']); ?>
-        </div>
-    <?php endif; ?>
-</div>
-<script src="script.js"></script>
-</body>
-</html>
